@@ -6,11 +6,31 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [user, setUser] = React.useState({
     email: "",
     password: "",
   });
-  const onLogin = async () => {};
+  const [buttonDisabled, setButtonDisabled] = React.useState(false)
+  const [loading, setLoading] = React.useState(false)
+
+  React.useEffect(() => {
+    if (user.email.length >0 && user.password.length > 0 && user.username.length > 0){
+      setButtonDisabled(false);
+    }
+    else {
+      setButtonDisabled(true);
+    }
+  }, [user])
+  const onLogin = async () => {
+    try {
+      
+    } catch (error:any) {
+      console.log('login failed', error.message)
+      toast.error(error.message)
+      
+    }
+  };
 
   return (
     <div className="container flex flex-col items-center min-h-screen justify-center">
