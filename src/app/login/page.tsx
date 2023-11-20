@@ -23,7 +23,7 @@ export default function LoginPage() {
     const onLogin = async () => {
         try {
             setLoading(true);
-            const response = await axios.get("/api/users/login", user);
+            const response = await axios.post("/api/users/login", user);
             console.log("Login success", response.data);
             toast.success("Login success");
             router.push("/profile");
@@ -45,10 +45,11 @@ export default function LoginPage() {
 
     return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
-        <h1>{loading ? "Processing" : "Login"}</h1>
+        <div className="innerdiv border border-white flex flex-col items-center justify-center p-12 rounded-xl">
+        <h1 className="font-bold text-3xl mb-7">{loading ? "Processing" : "Login"}</h1>
         <hr />
         
-        <label htmlFor="email">email</label>
+        <label htmlFor="email" className="p-3 text-left">Email</label>
         <input 
         className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
             id="email"
@@ -57,7 +58,7 @@ export default function LoginPage() {
             onChange={(e) => setUser({...user, email: e.target.value})}
             placeholder="email"
             />
-        <label htmlFor="password">password</label>
+        <label htmlFor="password" className="p-3 text-left">Password</label>
         <input 
         className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
             id="password"
@@ -70,6 +71,7 @@ export default function LoginPage() {
             onClick={onLogin}
             className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600">{buttonDisabled?'':'Submit'}</button>
             <Link href="/signup">Visit Signup page</Link>
+            </div>
         </div>
     )
 
